@@ -37,48 +37,57 @@ export default async function bot(sock, m) {
         await sock.sendMessage(sender, {
           text: "Mau bilang apa pada AI?",
         });
+        break;
       } else {
         try {
           const response = await sayai(args.join(" "));
           await sock.sendMessage(sender, { text: response.parts[0].text });
+          break;
         } catch (error) {
           console.error("Error calling sayai:", error);
           await sock.sendMessage(sender, {
             text: "Maaf, terjadi kesalahan saat memproses permintaan Anda.",
           });
+          break;
         }
       }
       break;
     case "sticker":
       if (msg.message.imageMessage) {
         await sticker(sock, sender, msg);
+        break;
       } else {
         await sock.sendMessage(sender, {
           text: "Kirim gambar dengan caption !sticker untuk membuat stiker.",
         });
+        break;
       }
-      break;
     case "convertmp3":
       if (msg.message.videoMessage) {
         await convertmp3(sock, sender, msg);
+        break;
       } else {
         await sock.sendMessage(sender, {
           text: "Kirim video dengan caption !convertmp3 untuk mengubahnya menjadi audio.",
         });
+        break;
       }
     case "mp4tiktok":
       if (args.length === 0) {
         await sock.sendMessage(sender, {
           text: "Kirim link TikTok dengan caption !mp4tiktok untuk mengunduh videonya.",
         });
+        break;
       } else {
         try {
           await mp4tiktok(sock, sender, args[0]);
+          break;
         } catch (error) {
           console.error("Error calling mp4tiktok:", error);
           await sock.sendMessage(sender, {
             text: "Maaf, terjadi kesalahan saat memproses permintaan Anda.",
           });
+          break;
         }
       }
   }

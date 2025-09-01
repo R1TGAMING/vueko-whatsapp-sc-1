@@ -30,6 +30,7 @@ const connectToWhatsapp = async () => {
   const sock = makeWASocket({
     auth: state,
     logger: pino({ level: "silent" }),
+    markOnlineOnConnect: false,
   });
 
   if (usePairingCode && !sock.authState.creds?.registered) {
