@@ -1,0 +1,7 @@
+.env
+sticker/*
+convertmp3/*
+mp4tiktok/*
+node_modules
+auth_info_multi.json
+auth_info_baileys
