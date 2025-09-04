@@ -5,6 +5,8 @@ import convertmp3 from "./commands/convertmp3.js";
 import mp4tiktok from "./commands/mp4tiktok.js";
 import mp4yt from "./commands/mp4yt.js";
 import tagall from "./commands/tagall.js";
+import rvo from "./commands/rvo.js";
+import randommnime from "./commands/randomnime.js";
 
 const helpCaption = `
 *Bot Vueko Command List*
@@ -34,6 +36,8 @@ const helpCaption = `
 -| Berbicara kepada AI Gemini
 | > !sticker 
 -| Mengubah gambar menjadi sticker WhatsApp
+| > !rvo
+-| Untuk melihat View Read-Once
 
 📝 Gunakan prefix "!" sebelum command.
 
@@ -112,7 +116,6 @@ export default async function bot(sock, m) {
       }
     case "sticker":
       if (msg.message.imageMessage || msg.message.videoMessage) {
-        
         await sticker(sock, sender, msg);
         break;
       } else {
@@ -166,6 +169,79 @@ export default async function bot(sock, m) {
           });
           break;
         }
+      }
+    case "rvo":
+      try {
+        if (msg.message.extendedTextMessage?.contextInfo?.quotedMessage) {
+          if (
+            msg.message.extendedTextMessage.contextInfo.quotedMessage
+              .imageMessage
+          ) {
+            try {
+              await rvo(msg);
+              await sock.sendMessage(
+                sender,
+                {
+                  image: {
+                    url: "./rvo/image.jpg",
+                    jpegThumbnail: "./rvo/image.jpg",
+                  },
+                },
+                { quoted: msg }
+              );
+              break;
+            } catch (e) {
+              await sock.sendMessage(sender, {
+                text: "Gagal memproses rvo",
+              });
+              break;
+            }
+          } else if (
+            msg.message.extendedTextMessage.contextInfo.quotedMessage
+              .videoMessage
+          ) {
+            try {
+              await rvo(msg);
+              await sock.sendMessage(
+                sender,
+                {
+                  video: { url: "./rvo/video.mp4" },
+                },
+                { quoted: msg }
+              );
+              break;
+            } catch (error) {
+              await sock.sendMessage(sender, {
+                text: "Gagal memproses rvo",
+              });
+              break;
+            }
+          } else {
+            await sock.sendMessage(sender, {
+              text: "Pesan yang di-quote bukan gambar atau video.",
+            });
+          }
+          break;
+        }
+      } catch (error) {
+        console.error("Error in rvo command:", error);
+        await sock.sendMessage(sender, {
+          text: "Maaf, terjadi kesalahan saat memproses rvo.",
+        });
+      }
+    case "randomnime":
+      try {
+        const data = await randommnime();
+
+        await sock.sendMessage(sender, {
+          image: data,
+          caption: "Random Anime",
+        });
+      } catch (error) {
+        console.error("Gagal memproses: ", error);
+        await sock.sendMessage(sender, {
+          text: "Gagal mengfetch randoomnime",
+        });
       }
   }
 }
