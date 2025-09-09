@@ -170,6 +170,22 @@ export default async function bot(sock, m) {
           break;
         }
       }
+    case "randomnime":
+      try {
+        const data = await randommnime();
+
+        await sock.sendMessage(sender, {
+          image: data,
+          caption: "Random Anime",
+        });
+        break;
+      } catch (error) {
+        console.error("Gagal memproses: ", error);
+        await sock.sendMessage(sender, {
+          text: "Gagal mengfetch randoomnime",
+        });
+        break;
+      }
     case "rvo":
       try {
         if (msg.message.extendedTextMessage?.contextInfo?.quotedMessage) {
@@ -228,20 +244,7 @@ export default async function bot(sock, m) {
         await sock.sendMessage(sender, {
           text: "Maaf, terjadi kesalahan saat memproses rvo.",
         });
-      }
-    case "randomnime":
-      try {
-        const data = await randommnime();
-
-        await sock.sendMessage(sender, {
-          image: data,
-          caption: "Random Anime",
-        });
-      } catch (error) {
-        console.error("Gagal memproses: ", error);
-        await sock.sendMessage(sender, {
-          text: "Gagal mengfetch randoomnime",
-        });
+        break;
       }
   }
 }
