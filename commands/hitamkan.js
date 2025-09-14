@@ -13,6 +13,10 @@ export default async function hitamkan(msg, sock, sender) {
 
     const imageBase64 = buffer.toString("base64");
 
+    await sock.sendMessage(sender, {
+      text: "Tunggu sejenak sedang memproses gambar... ☕",
+    });
+
     const { data } = await axios.post(
       "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-preview-image-generation:generateContent",
       {

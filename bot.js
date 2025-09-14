@@ -30,16 +30,22 @@ const helpCaption = `
 -| Mendownload video dari TikTok
 | > !mp4yt {url}
 -| Mendownload video dari YouTube
-| > !convertmp3
+| > !convertmp3 {add video}
 -| Mengubah format mp4 (video) ke mp3 (audio)
 
 *Fun*
-| > !sayai
+| > !sayai {teks}
 -| Berbicara kepada AI Gemini
-| > !sticker 
+| > !sticker {add gambar/gif}
 -| Mengubah gambar menjadi sticker WhatsApp
-| > !rvo
+| > !rvo {reply view read-once}
 -| Untuk melihat View Read-Once
+| > !hitamkan {add gambar}
+-| Untuk menghitamkan waifu anda
+| > !randomnime
+-| Mengirim gambar anime secara acak
+| > !brat {teks}
+-| Membuat teks dengan gaya Brat
 
 📝 Gunakan prefix "!" sebelum command.
 
