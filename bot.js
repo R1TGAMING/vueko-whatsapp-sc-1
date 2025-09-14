@@ -40,6 +40,10 @@ const helpCaption = `
 -| Mengubah gambar menjadi sticker WhatsApp
 | > !rvo
 -| Untuk melihat View Read-Once
+| > !brat {text}
+-| Untuk membuat brat
+| > !hitamkan
+-| Untuk menghitamkan waifu anda
 
 📝 Gunakan prefix "!" sebelum command.
 
