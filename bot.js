@@ -7,6 +7,8 @@ import mp4yt from "./commands/mp4yt.js";
 import tagall from "./commands/tagall.js";
 import rvo from "./commands/rvo.js";
 import randommnime from "./commands/randomnime.js";
+import brat from "./commands/brat.js";
+import hitamkan from "./commands/hitamkan.js";
 
 const helpCaption = `
 *Bot Vueko Command List*
@@ -245,6 +247,34 @@ export default async function bot(sock, m) {
           text: "Maaf, terjadi kesalahan saat memproses rvo.",
         });
         break;
+      }
+    case "brat":
+      if (args.length === 0) {
+        await sock.sendMessage(sender, {
+          text: "Tolong masukkan teks setelah perintah !brat",
+        });
+        break;
+      }
+
+      try {
+        await brat(sock, sender, args.join(" "));
+        break;
+      } catch (error) {
+        console.error("Error calling brat:", error);
+        await sock.sendMessage(sender, {
+          text: "Maaf, terjadi kesalahan saat memproses brat.",
+        });
+        break;
+      }
+    case "hitamkan":
+      if (msg.message.imageMessage) {
+        try {
+          await hitamkan(msg, sock, sender);
+        } catch {
+          await sock.sendMessage(sender, {
+            text: "Maaf, terjadi kesalahan saat memproses gambar",
+          });
+        }
       }
   }
 }
