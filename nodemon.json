@@ -1,0 +1,6 @@
+{
+  "watch": ["index.js", "commands"],
+  "ext": "js,json",
+  "ignore": ["node_modules", "auth_info.json", "auth", "session"],
+  "exec": "node index.js"
+}
