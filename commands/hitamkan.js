@@ -61,5 +61,6 @@ export default async function hitamkan(msg, sock, sender) {
     }
   } catch (error) {
     console.error("Error calling hitamkan:", error);
+    throw new Error("Gagal Membuat Gambar")
   }
 }

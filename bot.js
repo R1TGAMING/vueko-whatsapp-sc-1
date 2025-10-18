@@ -43,7 +43,7 @@ const helpCaption = `
 | > !hitamkan {add gambar}
 -| Untuk menghitamkan waifu anda
 | > !randomnime
--| Mengirim gambar anime secara acak
+-| Mengirim gambar anime secara acak (18+)
 | > !brat {teks}
 -| Membuat teks dengan gaya Brat
 
